@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I love you❤️</title>
+<style>
+* { box-sizing: border-box; font-family: "Segoe UI", sans-serif; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #ffe6ec;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent 0,
+      transparent 40px,
+      rgba(255, 255, 255, 0.3) 40px,
+      rgba(255, 255, 255, 0.3) 80px
+    ),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Ctext x='10' y='30' font-size='24'%3E❤️🥺🥰%3C/text%3E%3Ctext x='50' y='80' font-size='22'%3E💖%3C/text%3E%3C/svg%3E");
+}
+
+.card {
+  background: rgba(255,255,255,0.95);
+  padding: 32px 24px;
+  border-radius: 20px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.18);
+}
+
+h1 {
+  font-size: 1.6rem;
+  margin-bottom: 28px;
+  color: #333;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between; /* Yes left, No right */
+  position: relative;
+  height: 70px;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 14px 26px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+}
+
+#yesBtn { background: #ff4d6d; color: white; }
+#noBtn { background: #4caf50; color: white; }
+
+.message {
+  display: none;
+  margin-top: 28px;
+  font-size: 1.05rem;
+  color: #444;
+  line-height: 1.7;
+  text-align: left;
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 1.4rem; }
+  .buttons { flex-direction: column; gap: 20px; height:auto; }
+  button { width: 100%; }
+}
+</style>
+</head>
+
+<body>
+<div class="card">
+  <h1 id="mainHeading">Are you angry with me? 🥺</h1>
+
+  <div class="buttons">
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+  </div>
+
+  <div class="message" id="loveMessage"></div>
+</div>
+
+<script>
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const message = document.getElementById("loveMessage");
+const mainHeading = document.getElementById("mainHeading");
+
+// Move Yes button on hover / touch
+function moveYesButton() {
+  const rect = yesBtn.parentElement.getBoundingClientRect();
+  const maxX = rect.width - yesBtn.offsetWidth;
+  const maxY = rect.height - yesBtn.offsetHeight;
+
+  const randomX = Math.random() * maxX;
+  const randomY = Math.random() * maxY;
+
+  yesBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+}
+
+yesBtn.addEventListener("mouseenter", moveYesButton);
+yesBtn.addEventListener("touchstart", moveYesButton);
+
+// Show happy message on No click
+noBtn.addEventListener("click", () => {
+  mainHeading.textContent = "Yay! You’re not angry 😍";  // happy heading
+
+  message.innerHTML = `
+   I’m really, truly sorry for that moment. 🥺 I know my sudden behavior hurt you, and the more I think about it, the worse I feel. Please believe me when I say that hurting you was never my intention. At that time I had to go to take the laptop, but the way everything happened must have made you feel like I didn’t care or that you were not important to me. And that thought alone breaks my heart. <br>
+<br>
+You mean so much to me — far more than I can ever properly express. The last thing I would ever want is to make you feel ignored, unvalued, or hurt because of something I did. When I imagine you being sad because of me, it really hurts inside. I keep replaying that moment in my mind and wishing I had handled it better, spoken more gently, or explained things more clearly. <br>
+<br>
+Please understand that my love and care for you are real and deep. Sometimes situations happen suddenly, but my feelings for you never change in those moments. You are someone very precious to me. Your feelings matter to me, your happiness matters to me, and the way you feel because of my actions matters to me more than you know. <br>
+<br>
+I regret that moment a lot. If I could go back and change it, I would do it without thinking twice. I would never choose anything over your peace of mind or your smile. Seeing you hurt because of something I did makes me feel guilty again and again. I’m truly sorry from the deepest part of my heart. <br>
+<br>
+Please don’t think that I don’t care about you. The truth is the opposite — I care about you so much that even the thought of losing your trust scares me. I never want to be the reason for your tears or sadness. I only want to be someone who brings you comfort, support, and happiness. <br>
+<br>
+I promise I will be more careful with my words and actions. I will try harder to understand your feelings and make sure you never feel neglected again. You deserve patience, love, and respect from me, and I want to give you all of that. <br>
+<br>
+From the bottom of my heart, I’m very sorry for that moment. Please forgive me. 🥺 <br>
+<br>
+And one more thing I want you to always remember — I love you. I love you deeply, sincerely, and truly. No small misunderstanding or moment can ever change what you mean to me. <br>
+<br>
+I love you so much 🌷💗💎🌎😘
+   
+  `;
+
+  message.style.display = "block";
+  yesBtn.style.display = "none";
+  noBtn.style.display = "none";
+
+  // Optional: add floating hearts for happiness
+  for(let i=0; i<15; i++){
+    const heart = document.createElement('div');
+    heart.textContent = "❤️";
+    heart.style.position = "fixed";
+    heart.style.fontSize = Math.random()*30 + 20 + "px";
+    heart.style.left = Math.random()*window.innerWidth + "px";
+    heart.style.top = Math.random()*window.innerHeight + "px";
+    heart.style.pointerEvents = "none";
+    heart.style.opacity = 0.8;
+    heart.style.transition = "transform 2s ease-out, opacity 2s ease-out";
+    document.body.appendChild(heart);
+    setTimeout(()=>{ heart.style.transform = "translateY(-200px)"; heart.style.opacity=0; }, 50);
+    setTimeout(()=>{ heart.remove(); }, 2200);
+  }
+});
+</script>
+</body>
+</html>
